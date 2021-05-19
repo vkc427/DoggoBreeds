@@ -13,10 +13,11 @@ class ViewController: UITableViewController {
     var breedsImage = DogBreedImage()
     var images = [DogBreedImage?](repeating: nil, count: 100)
     let pulltoRefresh = UIRefreshControl()
-
+    @IBOutlet weak var lblNoData: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.lblNoData.isHidden = true
         getBreeds()
         addPTR()
     }
@@ -40,6 +41,8 @@ class ViewController: UITableViewController {
                 }
             case .failure(let error):
                 print(error.localizedDescription)
+                self.tableView.isHidden = true
+                self.lblNoData.isHidden = false
                 self.showAlert(message: Messages.ErrorMessage)
             }
         }
