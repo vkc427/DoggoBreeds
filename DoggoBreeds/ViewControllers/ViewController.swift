@@ -25,7 +25,7 @@ class ViewController: UITableViewController {
     
     func addPTR() {
         tableView.addSubview(pulltoRefresh)
-        pulltoRefresh.addTarget(self, action: #selector(refreshWeatherData(_:)), for: .valueChanged)
+        pulltoRefresh.addTarget(self, action: #selector(refreshBreed(_:)), for: .valueChanged)
         pulltoRefresh.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
         pulltoRefresh.attributedTitle = NSAttributedString(string: "Fetching Doggo Data")
     }
