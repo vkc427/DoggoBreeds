@@ -48,7 +48,7 @@ class ViewController: UITableViewController {
         }
     }
     
-    @objc private func refreshWeatherData(_ sender: Any) {
+    @objc private func refreshBreed(_ sender: Any) {
         getBreeds()
     }
     
