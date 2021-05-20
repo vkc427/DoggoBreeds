@@ -64,7 +64,6 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //can add pull to refresh with more time.
         let cell = tableView.dequeueReusableCell(withIdentifier: "DogViewTableViewCell") as! DogViewTableViewCell
         let breed = self.breedsData.message?[indexPath.row]
         let kempty = "-"
