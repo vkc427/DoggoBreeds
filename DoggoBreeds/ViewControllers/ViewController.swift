@@ -9,19 +9,46 @@ import UIKit
 import MBProgressHUD
 
 class ViewController: UITableViewController {
-    var breedsData = DogBreed()
-    var breedsImage = DogBreedImage()
-    var images = [DogBreedImage?](repeating: nil, count: 100)
+    var breedNames = [String]()
     let pulltoRefresh = UIRefreshControl()
     @IBOutlet weak var lblNoData: UILabel!
-
+    
+    let viewModel = ViewControllerViewModel(handler: ViewControllerAPIHandler())
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.lblNoData.isHidden = true
         getBreeds()
+        setViewModelCallbacks()
+        self.lblNoData.isHidden = true
         addPTR()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    func setViewModelCallbacks() {
+        viewModel.loadBreeds = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+                hud.show(animated: true)
+                self.viewModel.getDogBreedImage()
+                self.tableView.reloadData()
+                MBProgressHUD.hide(for: self.view, animated: true)
+                self.pulltoRefresh.endRefreshing()
+            }
+        }
+        
+        viewModel.loadImage = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.pulltoRefresh.endRefreshing()
+            }
+        }
+        
+    }
     
     func addPTR() {
         tableView.addSubview(pulltoRefresh)
@@ -31,21 +58,7 @@ class ViewController: UITableViewController {
     }
     
     func getBreeds() {
-        DoggoService().downloadBreeds { (result) in
-            switch result {
-            case .success(let data):
-                self.breedsData = data
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    self.pulltoRefresh.endRefreshing()
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-                self.tableView.isHidden = true
-                self.lblNoData.isHidden = false
-                self.showAlert(message: Messages.ErrorMessage)
-            }
-        }
+        viewModel.getDogBreeds()
     }
     
     @objc private func refreshBreed(_ sender: Any) {
@@ -60,44 +73,33 @@ class ViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.breedsData.message?.count ?? 0
+        return viewModel.breedsData.message?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DogViewTableViewCell") as! DogViewTableViewCell
-        let breed = self.breedsData.message?[indexPath.row]
+        let breed = viewModel.breedsData.message?[indexPath.row]
         let kempty = "-"
-        cell.lblBreedName.text = breed?.uppercased() ?? kempty
-        cell.imgBreed.image = nil
-        DoggoService().downloadImage(breedName: (self.breedsData.message?[indexPath.row])!) { result in
-            let hud = MBProgressHUD.showAdded(to: cell.imgBreed, animated: true)
-            hud.show(animated: true)
-            switch result {
-                case .success(let data):
-                    self.breedsImage = data
-                    guard let imgURL = self.breedsImage.message, let url = URL(string: imgURL) else {
-                        return
-                    }
-                    cell.imgBreed.downloadedFrom(url: url)
-                    hud.hide(animated: true)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
+        if let breedName = breed, !breedName.isEmpty {
+            cell.lblBreedName.text = breedName.uppercased()
+            if let imgURL = viewModel.images[indexPath.row]?.message, let url = URL(string: imgURL) {
+                cell.imgBreed.downloadedFrom(url: url)
+            }
+        } else {
+            cell.lblBreedName.text = kempty
         }
         return cell
 
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let breedName = self.breedsData.message?[indexPath.row]
+        let breedName = viewModel.breedsData.message?[indexPath.row]
         let sb = UIStoryboard(name: "Main", bundle: nil)
         if let vc = sb.instantiateViewController(identifier: "DoggoImagesViewController") as? DoggoImagesViewController {
             vc.breedName = breedName
             self.navigationController?.pushViewController(vc, animated: true)
         }
-       
    }
     
-
 }
 

@@ -22,6 +22,8 @@
 		3848C2D22654BC6500EC70D6 /* DoggoImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3848C2D12654BC6500EC70D6 /* DoggoImagesViewController.swift */; };
 		3848C2D52654C27600EC70D6 /* DoggoImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3848C2D42654C27600EC70D6 /* DoggoImagesCollectionViewCell.swift */; };
 		3848C2DB26557D1200EC70D6 /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3848C2DA26557D1200EC70D6 /* NetworkCheck.swift */; };
+		3848C2F6265D682500EC70D6 /* ViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3848C2F5265D682500EC70D6 /* ViewControllerViewModel.swift */; };
+		3848C2F9265D683200EC70D6 /* ViewControllerAPIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3848C2F8265D683200EC70D6 /* ViewControllerAPIHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		3848C2D12654BC6500EC70D6 /* DoggoImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoggoImagesViewController.swift; sourceTree = "<group>"; };
 		3848C2D42654C27600EC70D6 /* DoggoImagesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoggoImagesCollectionViewCell.swift; sourceTree = "<group>"; };
 		3848C2DA26557D1200EC70D6 /* NetworkCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheck.swift; sourceTree = "<group>"; };
+		3848C2F5265D682500EC70D6 /* ViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerViewModel.swift; sourceTree = "<group>"; };
+		3848C2F8265D683200EC70D6 /* ViewControllerAPIHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerAPIHandler.swift; sourceTree = "<group>"; };
 		5DF86BFB095991C4388FCE14 /* Pods_DoggoBreeds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DoggoBreeds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87D39517FAA1F2FCD2AEBCF2 /* Pods-DoggoBreeds.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoggoBreeds.release.xcconfig"; path = "Target Support Files/Pods-DoggoBreeds/Pods-DoggoBreeds.release.xcconfig"; sourceTree = "<group>"; };
 		920B3DBC18FD0249E98AB1B0 /* Pods-DoggoBreeds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoggoBreeds.debug.xcconfig"; path = "Target Support Files/Pods-DoggoBreeds/Pods-DoggoBreeds.debug.xcconfig"; sourceTree = "<group>"; };
@@ -79,6 +83,8 @@
 		3848C29E26544E7600EC70D6 /* DoggoBreeds */ = {
 			isa = PBXGroup;
 			children = (
+				3848C31D265EB17700EC70D6 /* ImagesViewControllerViewModel */,
+				3848C2F4265D680D00EC70D6 /* ViewControllerViewModel */,
 				3848C2BB265464E300EC70D6 /* Helpers */,
 				3848C2B426544E8D00EC70D6 /* ViewControllers */,
 				3848C29F26544E7600EC70D6 /* AppDelegate.swift */,
@@ -112,6 +118,22 @@
 				3848C2DA26557D1200EC70D6 /* NetworkCheck.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		3848C2F4265D680D00EC70D6 /* ViewControllerViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3848C2F5265D682500EC70D6 /* ViewControllerViewModel.swift */,
+				3848C2F8265D683200EC70D6 /* ViewControllerAPIHandler.swift */,
+			);
+			path = ViewControllerViewModel;
+			sourceTree = "<group>";
+		};
+		3848C31D265EB17700EC70D6 /* ImagesViewControllerViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ImagesViewControllerViewModel;
 			sourceTree = "<group>";
 		};
 		753ACDA6185198369F8314B5 /* Pods */ = {
@@ -252,10 +274,12 @@
 				3848C2C12654651200EC70D6 /* DogService.swift in Sources */,
 				3848C2A026544E7600EC70D6 /* AppDelegate.swift in Sources */,
 				3848C2D52654C27600EC70D6 /* DoggoImagesCollectionViewCell.swift in Sources */,
+				3848C2F6265D682500EC70D6 /* ViewControllerViewModel.swift in Sources */,
 				3848C2B92654647B00EC70D6 /* SceneDelegate.swift in Sources */,
 				3848C2C82654670000EC70D6 /* DogViewTableViewCell.swift in Sources */,
 				3848C2BD2654650700EC70D6 /* DogObject.swift in Sources */,
 				3848C2C42654652200EC70D6 /* DogUtilities.swift in Sources */,
+				3848C2F9265D683200EC70D6 /* ViewControllerAPIHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
